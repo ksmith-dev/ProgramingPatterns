@@ -7,6 +7,14 @@
     -fx-background-color: darkgoldenrod;
     -fx-font-size: 97%;
 }
+.button:hover
+{
+    -fx-background-color: #f4aa42;
+}
+.button:focused
+{
+    -fx-background-color: #f78d02;
+}
 .label
 {
     -fx-background-color: aliceblue;
@@ -14,4 +22,28 @@
     -fx-border-color: black;
     -fx-border-style: solid;
     -fx-border-width: 1px;
+}
+#sin, #cos, #tan
+{
+    -fx-background-color: #4286f4;
+}
+#sin:hover, #cos:hover, #tan:hover
+{
+    -fx-background-color: #a6d8fc;
+}
+#sin:focused, #cos:focused, #tan:focused
+{
+    -fx-background-color: #8696f9;
+}
+#C
+{
+    -fx-background-color: #1b9b2a;
+}
+#C:hover
+{
+    -fx-background-color: #d8f7d4;
+}
+#C:focused
+{
+    -fx-background-color: #74f776;
 }
