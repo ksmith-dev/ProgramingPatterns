@@ -1,0 +1,44 @@
+.panel {
+    -fx-background-color: darkseagreen;
+    -fx-background-radius: 5 5 5 5;
+}
+
+.button {
+    -fx-background-color: beige;
+    -fx-background-radius: 3 3 3 3;
+    -fx-border-color: darkslategray;
+    -fx-border-radius: 3 3 3 3;
+    -fx-border-width: 2px;
+}
+
+.button:hover {
+    -fx-background-color: ivory;
+}
+
+.button:pressed {
+    -fx-background-color: darkseagreen;
+}
+
+.text {
+    -fx-background-color: beige;
+    -fx-border-color: beige;
+    -fx-border-radius: 3 3 3 3;
+    -fx-border-width: 2px;
+}
+
+.text:focused {
+    -fx-background-color: ivory;
+    -fx-border-color: darkslategray;
+    -fx-border-radius: 3 3 3 3;
+    -fx-border-width: 2px;
+}
+
+.space-bottom {
+    -fx-padding: 0 0 10 0;
+}
+
+.border-top {
+    -fx-border-width: 2 0 0 0;
+    -fx-border-color: darkslategray;
+    -fx-padding: 10 0 0 0;
+}

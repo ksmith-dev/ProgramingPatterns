@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parts>
+    <part>
+        <id>001</id>
+        <manufacturer>Ford</manufacturer>
+        <list-price>100.0</list-price>
+        <categories>
+            <category>rear drive</category>
+            <category>v6</category>
+        </categories>
+    </part>
+</parts>
