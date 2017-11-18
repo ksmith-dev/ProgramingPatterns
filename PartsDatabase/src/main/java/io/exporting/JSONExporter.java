@@ -1,4 +1,7 @@
 package io.exporting;
+/**
+ * This class is used to export PartsDatabase object into a gson file format.
+ */
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -7,6 +10,12 @@ import model.PartsDatabase;
 
 import java.io.*;
 
+/**
+ * | Description |
+ * This class is used to export PartsDatabase object into a gson file format.
+ * @author Kevin Smith
+ * @version 1.0
+ */
 public class JSONExporter implements IExporter
 {
     private PartsDatabase partsDatabase;
@@ -16,6 +25,10 @@ public class JSONExporter implements IExporter
         this.partsDatabase = partsDatabase;
     }
 
+    /**
+     * This method exports a PartsDatabase object into a gson file format.
+     * @return boolean - representing true for a successful transfer or false for an unsuccessful transfer
+     */
     @Override
     public boolean exportParts()
     {
@@ -29,6 +42,7 @@ public class JSONExporter implements IExporter
         {
             fileOutputStream = new FileOutputStream(file);
             fileOutputStream.write(jsonString.getBytes());
+            fileOutputStream.close();
             return true;
         }
         catch (FileNotFoundException e)

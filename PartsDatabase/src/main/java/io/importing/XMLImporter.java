@@ -1,5 +1,7 @@
 package io.importing;
-
+/**
+ * This class is used to import PartsDatabase object from a xml file format.
+ */
 import io.IImporter;
 import model.CarPart;
 import model.PartsDatabase;
@@ -14,7 +16,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
+/**
+ * | Description |
+ * This class is used to import PartsDatabase object from a xml file format.
+ * @author Kevin Smith
+ * @version 1.0
+ */
 public class XMLImporter implements IImporter
 {
     private PartsDatabase partsDatabase = new PartsDatabase();
@@ -22,7 +29,10 @@ public class XMLImporter implements IImporter
     public XMLImporter()
     {
     }
-
+    /**
+     * This method imports a PartsDatabase object from a xml file format.
+     * @return boolean - representing true for a successful transfer or false for an unsuccessful transfer
+     */
     @Override
     public boolean importParts()
     {
@@ -80,7 +90,10 @@ public class XMLImporter implements IImporter
         }
         return false;
     }
-
+    /**
+     * This method retrieves the PartsDatabase object;
+     * @return PartsDatabase object, note this can be null if not properly imported
+     */
     public PartsDatabase getPartsDatabase()
     {
         return this.partsDatabase;

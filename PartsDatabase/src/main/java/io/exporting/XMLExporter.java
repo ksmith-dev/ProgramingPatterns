@@ -1,4 +1,7 @@
 package io.exporting;
+/**
+ * This class is used to export PartsDatabase object into a xml file format.
+ */
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
@@ -17,6 +20,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * | Description |
+ * This class is used to export PartsDatabase object into a xml file format.
+ * @author Kevin Smith
+ * @version 1.0
+ */
 public class XMLExporter implements IExporter
 {
     private PartsDatabase partsDatabase;
@@ -26,6 +35,11 @@ public class XMLExporter implements IExporter
         this.partsDatabase = partsDatabase;
     }
 
+    /**
+     * | Description |
+     * This method exports the PartsDatabase object into an xml file format
+     * @return boolean - representing true for a successful transfer or false for an unsuccessful transfer
+     */
     @Override
     public boolean exportParts()
     {
@@ -86,6 +100,8 @@ public class XMLExporter implements IExporter
             XMLSerializer serializer = new XMLSerializer(outputStream, format);
 
             serializer.serialize(xml);
+
+            outputStream.close();
 
             return true;
         }

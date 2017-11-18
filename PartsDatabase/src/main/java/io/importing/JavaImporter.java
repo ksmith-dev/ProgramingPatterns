@@ -1,12 +1,19 @@
 package io.importing;
-
+/**
+ * This class is used to import PartsDatabase object from a java serialized object file format.
+ */
 import io.IImporter;
 import model.PartsDatabase;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-
+/**
+ * | Description |
+ * This class is used to import PartsDatabase object from a java serialized object file format.
+ * @author Kevin Smith
+ * @version 1.0
+ */
 public class JavaImporter implements IImporter
 {
     private PartsDatabase partsDatabase;
@@ -15,6 +22,10 @@ public class JavaImporter implements IImporter
     {
     }
 
+    /**
+     * This method imports a PartsDatabase object from a java serialized object file format.
+     * @return boolean - representing true for a successful transfer or false for an unsuccessful transfer
+     */
     @Override
     public boolean importParts()
     {
@@ -37,6 +48,10 @@ public class JavaImporter implements IImporter
         }
     }
 
+    /**
+     * This method retrieves the PartsDatabase object;
+     * @return PartsDatabase object, note this can be null if not properly imported
+     */
     public PartsDatabase getPartsDatabase()
     {
         return partsDatabase;

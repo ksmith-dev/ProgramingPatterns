@@ -1,5 +1,7 @@
 package io.importing;
-
+/**
+ * This class is used to import PartsDatabase object from a gson object file format.
+ */
 import com.google.gson.Gson;
 import io.IImporter;
 import model.CarPart;
@@ -10,7 +12,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * | Description |
+ * This class is used to import PartsDatabase object from a gson object file format.
+ * @author Kevin Smith
+ * @version 1.0
+ */
 public class JSONImporter implements IImporter
 {
     private PartsDatabase partsDatabase;
@@ -18,7 +25,10 @@ public class JSONImporter implements IImporter
     public JSONImporter()
     {
     }
-
+    /**
+     * This method imports a PartsDatabase object from a gson object file format.
+     * @return boolean - representing true for a successful transfer or false for an unsuccessful transfer
+     */
     @Override
     public boolean importParts()
     {
@@ -74,7 +84,10 @@ public class JSONImporter implements IImporter
             this.carParts = carParts;
         }
     }
-
+    /**
+     * This method retrieves the PartsDatabase object;
+     * @return PartsDatabase object, note this can be null if not properly imported
+     */
     public PartsDatabase getPartsDatabase()
     {
         return partsDatabase;

@@ -9,4 +9,13 @@
             <category>v6</category>
         </categories>
     </part>
+    <part>
+        <id>002</id>
+        <manufacturer>Tesla</manufacturer>
+        <list-price>300.0</list-price>
+        <categories>
+            <category>front drive</category>
+            <category>electric</category>
+        </categories>
+    </part>
 </parts>
