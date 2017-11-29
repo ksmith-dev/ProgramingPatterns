@@ -1,4 +1,8 @@
 package View;
+/**
+ * | Description |
+ * This class manages the view content
+ */
 
 import Control.ToDoControl;
 import Object.*;
@@ -22,29 +26,44 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
+/**
+ * | Description |
+ * This class handles the view functionality, starts and develops the content for the stag and runs stage.show();
+ * @author Kevin Smith
+ * @version 1.0
+ */
 public class GUI extends Application implements ToDoObserver
 {
     private static final int WIDTH = 500;
     private static final int HEIGHT = 400;
 
     private ToDoControl control = new ToDoControl(this);
-    private ArrayList<ToDo> toToList;
-    private HashMap<UUID, Boolean> toDoStates;
+    private ArrayList<ToDo> toToList = new ArrayList<>();
+    private HashMap<UUID, Boolean> toDoStates = new HashMap<>();
 
     private BorderPane pane = new BorderPane();
 
     private TextArea inputText;
 
+    /**
+     * | Description |
+     * This method initiate the view for the application and requires a stage class object.
+     * @param stage Requires a Stage class object
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception
     {
+        this.toToList = control.getToDoListFromModel();
+        this.toDoStates = control.getToDoStatesFromModel();
+
         stage.setTitle("Task List");
         stage.setWidth(WIDTH);
         stage.setHeight(HEIGHT);
 
-        System.out.println("checking if to do list is empty");
         if(control.getToDoListFromModel().isEmpty())
         {
+
             loadView(ViewStates.WELCOME);
         }
         else
@@ -76,26 +95,33 @@ public class GUI extends Application implements ToDoObserver
 
     private void setTopPaneContent(ViewStates viewState)
     {
+        VBox vBox = new VBox();
+        vBox.setMinHeight(40.00);
+        vBox.setAlignment(Pos.CENTER_LEFT);
         Text text;
+
         switch (viewState)
         {
             case WELCOME :
                 pane.setTop(null);
                 break;
             case TEXT_INPUT:
-                text = new Text("Add New Task");
-                text.setFont(Font.font ("Verdana", 20));
-                pane.setTop(text);
+                text = new Text("  Add New Task");
+                text.getStyleClass().add("title");
+                vBox.getChildren().add(text);
+                pane.setTop(vBox);
                 break;
             case LIST:
-                text = new Text("Tasks");
-                text.setFont(Font.font ("Verdana", 20));
-                pane.setTop(text);
+                text = new Text("  Tasks");
+                text.getStyleClass().add("title");
+                vBox.getChildren().add(text);
+                pane.setTop(vBox);
                 break;
             default:
                 text = new Text("Welcome");
-                text.setFont(Font.font ("Verdana", 20));
-                pane.setTop(text);
+                text.getStyleClass().add("title");
+                vBox.getChildren().add(text);
+                pane.setTop(vBox);
                 break;
         }
     }
@@ -142,31 +168,34 @@ public class GUI extends Application implements ToDoObserver
                 {
                     for (ToDo toDo : toToList)
                     {
-                        HBox hBox = new HBox();
-                        hBox.setId(toDo.getId().toString());
-
-                        CheckBox checkBox = new CheckBox();
-                        if (toDoStates.containsKey(toDo.getId()))
+                        if (toDoStates.containsKey(toDo.getId()) && !toDoStates.get(toDo.getId()))
                         {
-                            checkBox.setSelected(toDoStates.get(toDo.getId()));
-                        }
-                        else
-                        {
-                            control.updateCheckedStatesOfModel(toDo.getId(), false);
-                        }
+                            HBox hBox = new HBox();
+                            hBox.setId(toDo.getId().toString());
 
-                        Text text = new Text(toDo.getMsg());
-
-                        checkBox.setOnAction(new EventHandler<ActionEvent>()
-                        {
-                            @Override
-                            public void handle(ActionEvent event)
+                            CheckBox checkBox = new CheckBox();
+                            if (toDoStates.containsKey(toDo.getId()))
                             {
-                                control.updateCheckedStatesOfModel(toDo.getId(), checkBox.isSelected());
+                                checkBox.setSelected(toDoStates.get(toDo.getId()));
                             }
-                        });
-                        hBox.getChildren().addAll(checkBox, text);
-                        listView.getItems().add(hBox);
+                            else
+                            {
+                                control.updateCheckedStatesOfModel(toDo.getId(), false);
+                            }
+
+                            Text text = new Text(toDo.getMsg());
+
+                            checkBox.setOnAction(new EventHandler<ActionEvent>()
+                            {
+                                @Override
+                                public void handle(ActionEvent event)
+                                {
+                                    control.updateCheckedStatesOfModel(toDo.getId(), checkBox.isSelected());
+                                }
+                            });
+                            hBox.getChildren().addAll(checkBox, text);
+                            listView.getItems().add(hBox);
+                        }
                     }
                     pane.setCenter(listView);
                 }
@@ -179,30 +208,39 @@ public class GUI extends Application implements ToDoObserver
                 pane.setCenter(null);
                 break;
         }
-
     }
 
     private void setLeftPaneContent(ViewStates viewState)
     {
+        VBox vBox;
         switch (viewState)
         {
             case WELCOME :
                 pane.setLeft(null);
                 break;
             case LIST :
-                pane.setLeft(null);
+                vBox = new VBox();
+                vBox.setMinWidth(40.00);
+                pane.setLeft(vBox);
                 break;
             case TEXT_INPUT :
-                pane.setLeft(null);
+                vBox = new VBox();
+                vBox.setMinWidth(40.00);
+                pane.setLeft(vBox);
                 break;
             default :
-                pane.setLeft(null);
+                vBox = new VBox();
+                vBox.setMinWidth(40.00);
+                pane.setLeft(vBox);
                 break;
         }
     }
 
     private void setRightPaneContent(ViewStates viewState)
     {
+        VBox vBox = new VBox();
+        vBox.setMinWidth(40.00);
+
         switch (viewState)
         {
             case WELCOME:
@@ -220,22 +258,26 @@ public class GUI extends Application implements ToDoObserver
                         loadView(ViewStates.TEXT_INPUT);
                     }
                 });
-                pane.setRight(button);
+                vBox.getChildren().add(button);
+                pane.setRight(vBox);
                 break;
             case TEXT_INPUT:
-                pane.setRight(null);
+                pane.setRight(vBox);
                 break;
             default:
-                pane.setRight(null);
+                pane.setRight(vBox);
                 break;
         }
     }
 
     private void setBottomPaneContent(ViewStates viewState)
     {
+        VBox vBox;
+
         switch (viewState)
         {
             case TEXT_INPUT:
+                vBox = new VBox();
                 Button button = new Button("Submit");
                 button.getStyleClass().add("btn-submit");
                 button.setOnAction(new EventHandler<ActionEvent>() {
@@ -244,14 +286,26 @@ public class GUI extends Application implements ToDoObserver
                         control.addNewToDoToModel(inputText.getText());
                     }
                 });
-                pane.setBottom(button);
+                vBox.getChildren().add(button);
+                vBox.setMinHeight(40.00);
+                vBox.setAlignment(Pos.TOP_CENTER);
+                pane.setBottom(vBox);
                 break;
             default:
-                pane.setBottom(null);
+                vBox = new VBox();
+                vBox.setMinHeight(40.00);
+                pane.setBottom(vBox);
                 break;
         }
     }
 
+    /**
+     * | Description |
+     * This method delivers an instance of an observable object along with view state arguments, to update the view
+     * according to particular observable object updates.
+     * @param observable Requires an Observable class object.
+     * @param args Requires any number of Object class level objects
+     */
     @Override
     public void updateObservable(ToDoObservable observable, Object... args)
     {

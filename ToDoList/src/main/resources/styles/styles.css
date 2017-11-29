@@ -10,9 +10,18 @@
     -fx-border-radius: 0 0 0 0;
     -fx-background-radius: 0 0 0 0;
     -fx-text-fill: white;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 2.5em;
 }
 
 .button:hover
 {
     -fx-background-color: #A7C7C5;
+}
+
+.title
+{
+    -fx-font-family: "Verdana";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
 }

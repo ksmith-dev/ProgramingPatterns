@@ -1,12 +1,22 @@
 package IO.file_import;
+/**
+ * This class manages all code needed to import data to a json file.
+ */
 
 import IO.Import;
+import IO.TemplateToDoList;
+import IO.TemplateToDoState;
 import com.google.gson.Gson;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-
+/**
+ * | Description |
+ * This class manages all code needed to import data to a json file using gson
+ * @author Kevin Smith
+ * @version 1.0
+ */
 import Object.*;
 
 public class JSONImport implements Import
@@ -14,6 +24,11 @@ public class JSONImport implements Import
     private TemplateToDoList toDoListTemplate = new TemplateToDoList();
     private TemplateToDoState toDoStateTemplate = new TemplateToDoState();
 
+    /**
+     * | Description |
+     * This method initializes and preforms all steps needed to import data into a json file.
+     * @return Boolean - representing the success state of the method
+     */
     @Override
     public boolean importJSON()
     {
@@ -28,6 +43,25 @@ public class JSONImport implements Import
         {
             return false;
         }
+    }
+
+    /**
+     * | Description |
+     * This method returns all to do objects
+     * @return ArrayList of to do objects
+     */
+    public ArrayList<ToDo> getToDoList()
+    {
+        return this.toDoListTemplate.getToDoList();
+    }
+
+    /**
+     * | Description |
+     * This method returns all to do checked state values
+     * @return HashMap<UUID, Boolean> - representing to do id's and checked state true/false
+     */
+    public HashMap<UUID, Boolean> getToDoState() {
+        return this.toDoStateTemplate.getToDoState();
     }
 
     private boolean importFiles(Class importClass, IOType templateType, String path)
@@ -74,14 +108,5 @@ public class JSONImport implements Import
             }
         }
         return false;
-    }
-
-    public ArrayList<ToDo> getToDoList()
-    {
-        return this.toDoListTemplate.getToDoList();
-    }
-
-    public HashMap<UUID, Boolean> getToDoState() {
-        return this.toDoStateTemplate.getToDoState();
     }
 }
