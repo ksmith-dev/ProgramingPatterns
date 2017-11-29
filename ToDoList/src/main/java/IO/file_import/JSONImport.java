@@ -1,62 +1,87 @@
 package IO.file_import;
 
 import IO.Import;
-
-import Model.*;
 import com.google.gson.Gson;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
+
+import Object.*;
 
 public class JSONImport implements Import
 {
-    private List<ToDo> toDoList;
+    private TemplateToDoList toDoListTemplate = new TemplateToDoList();
+    private TemplateToDoState toDoStateTemplate = new TemplateToDoState();
 
     @Override
-    public boolean importList()
+    public boolean importJSON()
+    {
+        Boolean toDoListImported = importFiles(TemplateToDoList.class, IOType.TO_DO_LIST, "ToDoList.json");
+        Boolean toDoStateImported = importFiles(TemplateToDoState.class, IOType.TO_DO_STATE, "ToDoStates.json");
+
+        if (toDoListImported && toDoStateImported)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private boolean importFiles(Class importClass, IOType templateType, String path)
     {
         FileReader reader = null;
 
-        File file = new File("ToDoList.json");
+        File file = new File(path);
 
-        try
+        if (file.isFile())
         {
-            reader = new FileReader(file);
-            Gson gson = new Gson();
-
-            ToDoList jsonToDoList = gson.fromJson(reader, ToDoList.class);
-            List<ToDo> toDoList = jsonToDoList.getToDoList();
-
-            for (ToDo toDo : toDoList)
+            try
             {
-                this.toDoList.add(toDo);
-            }
+                reader = new FileReader(file);
+                Gson gson = new Gson();
 
-        } catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            if(reader != null)
-            {
-                try
+                if (templateType.equals(IOType.TO_DO_LIST))
                 {
-                    reader.close();
+                    this.toDoListTemplate = gson.fromJson(reader, TemplateToDoList.class);
+
                 }
-                catch (IOException e)
+                if (templateType.equals(IOType.TO_DO_STATE))
                 {
-                    e.printStackTrace();
+                    this.toDoStateTemplate = gson.fromJson(reader, TemplateToDoState.class);
+                }
+                return true;
+            }
+            catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                if(reader != null)
+                {
+                    try
+                    {
+                        reader.close();
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
         return false;
     }
 
-    public List<ToDo> getToDoList()
+    public ArrayList<ToDo> getToDoList()
     {
-        return toDoList;
+        return this.toDoListTemplate.getToDoList();
+    }
+
+    public HashMap<UUID, Boolean> getToDoState() {
+        return this.toDoStateTemplate.getToDoState();
     }
 }

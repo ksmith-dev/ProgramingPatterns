@@ -2,5 +2,6 @@ package IO;
 
 public interface export
 {
-    public boolean exportToDoList();
+    public boolean exportToJSON();
+
 }

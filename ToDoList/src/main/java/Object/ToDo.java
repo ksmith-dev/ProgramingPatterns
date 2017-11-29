@@ -1,8 +1,8 @@
-package Model;
+package Object;
 
 import java.util.UUID;
 
-public class ToDo extends ToDoObservable
+public class ToDo
 {
     private UUID id = UUID.randomUUID();
     private String msg;

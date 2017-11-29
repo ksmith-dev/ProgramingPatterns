@@ -2,5 +2,5 @@ package IO;
 
 public interface Import
 {
-    public boolean importList();
+    public boolean importJSON();
 }

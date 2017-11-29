@@ -1,4 +1,4 @@
-package Model;
+package Object;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,21 +12,21 @@ public class ToDoObservable
         observers = new HashSet<>();
     }
 
-    public void notify(Object... args)
+    public void notifyToDoObservers(Object... args)
     {
         for (ToDoObserver observer : observers)
         {
-            observer.update(this, args);
+            observer.updateObservable(this, args);
         }
     }
 
-    public void add(ToDoObserver observer)
+    public void addToDoObserver(ToDoObserver observer)
     {
         this.observers.add(observer);
     }
 
-    public void remove(ToDoObserver observer)
+    public void removeToDoObserver(ToDoObserver observer)
     {
-        observers.remove(observer);
+        this.observers.remove(observer);
     }
 }
