@@ -1,4 +1,8 @@
 package ui;
+/**
+ * | Description |
+ * This class manages all graphical user interface requirements
+ */
 
 import adapters.LineAdapter;
 import adapters.OvalAdapter;
@@ -25,6 +29,12 @@ import shapes.Line;
 import shapes.Rectangle;
 import shapes.Triangle;
 
+/**
+ * | Description |
+ * This class manages all graphical user interface requirements
+ * @author Kevin Smith
+ * @version 1.0
+ */
 public class UserInterface
 {
     private static final double SLIDER_MIN = 100.00;
@@ -53,6 +63,11 @@ public class UserInterface
     private boolean isFill = false;
     private double size = SLIDER_DEFAULT_VALUE;
 
+    /**
+     * | Description |
+     * This method returns a scene object built by this class
+     * @return Scene - representing the graphical user interface scene
+     */
     public Scene getScene()
     {
         BorderPane pane = new BorderPane();
