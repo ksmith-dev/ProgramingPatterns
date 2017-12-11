@@ -1,6 +1,6 @@
 package FileInOut;
 
-public interface exporting
+public interface ExportInterface
 {
-    public boolean importJson();
+    public boolean exportJson(String path);
 }

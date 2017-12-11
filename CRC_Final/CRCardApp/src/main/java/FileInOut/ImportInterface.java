@@ -1,5 +1,6 @@
 package FileInOut;
 
-public interface Import
+public interface ImportInterface
 {
+    public boolean importJson(String path);
 }
