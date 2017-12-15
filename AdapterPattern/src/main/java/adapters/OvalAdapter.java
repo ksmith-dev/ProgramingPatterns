@@ -17,12 +17,7 @@ import shapes.Circle;
  */
 public class OvalAdapter implements IShape
 {
-    private double radius;
-    private double x;
-    private double y;
-    private double thickness;
-    private Color color;
-    private boolean isFill;
+    private Circle circle;
 
     /**
      * | Constructor |
@@ -31,12 +26,7 @@ public class OvalAdapter implements IShape
      */
     public OvalAdapter(Circle circle)
     {
-        this.radius = circle.getRadius();
-        this.x = circle.getX();
-        this.y = circle.getY();
-        this.thickness = circle.getThickness();
-        this.color = circle.getColor();
-        this.isFill = circle.isFill();
+        this.circle = circle;
     }
 
     /**
@@ -48,7 +38,13 @@ public class OvalAdapter implements IShape
     @Override
     public IShape setThickness(double thickness)
     {
-        this.thickness = thickness;
+        circle = new Circle(
+                circle.getRadius(),
+                circle.getX(),
+                circle.getY(),
+                thickness,
+                circle.getColor(),
+                circle.isFill());
         return this;
     }
 
@@ -61,7 +57,13 @@ public class OvalAdapter implements IShape
     @Override
     public IShape setColor(Color color)
     {
-        this.color = color;
+        circle = new Circle(
+                circle.getRadius(),
+                circle.getX(),
+                circle.getY(),
+                circle.getThickness(),
+                color,
+                circle.isFill());
         return this;
     }
 
@@ -74,7 +76,13 @@ public class OvalAdapter implements IShape
     @Override
     public IShape setFilled(boolean isFill)
     {
-        this.isFill = isFill;
+        circle = new Circle(
+                circle.getRadius(),
+                circle.getX(),
+                circle.getY(),
+                circle.getThickness(),
+                circle.getColor(),
+                isFill);
         return this;
     }
 
@@ -86,7 +94,7 @@ public class OvalAdapter implements IShape
     @Override
     public double getX()
     {
-        return x;
+        return circle.getX();
     }
     /**
      * | Description |
@@ -96,7 +104,7 @@ public class OvalAdapter implements IShape
     @Override
     public double getY()
     {
-        return y;
+        return circle.getY();
     }
 
     /**
@@ -107,7 +115,7 @@ public class OvalAdapter implements IShape
     @Override
     public double getThickness()
     {
-        return thickness;
+        return circle.getThickness();
     }
 
     /**
@@ -118,7 +126,7 @@ public class OvalAdapter implements IShape
     @Override
     public Color getColor()
     {
-        return color;
+        return circle.getColor();
     }
 
     /**
@@ -129,7 +137,7 @@ public class OvalAdapter implements IShape
     @Override
     public boolean getFilled()
     {
-        return isFill;
+        return circle.isFill();
     }
 
     /**
@@ -140,21 +148,21 @@ public class OvalAdapter implements IShape
     @Override
     public void drawShape(GraphicsContext graphics)
     {
-        if (isFill)
+        if (circle.isFill())
         {
-            graphics.setFill(color);
-            graphics.setStroke(color);
-            graphics.setLineWidth(thickness);
+            graphics.setFill(circle.getColor());
+            graphics.setStroke(circle.getColor());
+            graphics.setLineWidth(circle.getThickness());
 
-            graphics.fillOval(x, y, radius, radius);
-            graphics.strokeOval(x, y, radius, radius);
+            graphics.fillOval(circle.getX(), circle.getY(), circle.getRadius(), circle.getRadius());
+            graphics.strokeOval(circle.getX(), circle.getY(), circle.getRadius(), circle.getRadius());
         }
         else
         {
-            graphics.setStroke(color);
-            graphics.setLineWidth(thickness);
+            graphics.setStroke(circle.getColor());
+            graphics.setLineWidth(circle.getThickness());
 
-            graphics.strokeOval(x, y, radius, radius);
+            graphics.strokeOval(circle.getX(), circle.getY(), circle.getRadius(), circle.getRadius());
         }
     }
 }

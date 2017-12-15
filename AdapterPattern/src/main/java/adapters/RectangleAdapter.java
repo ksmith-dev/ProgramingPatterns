@@ -7,13 +7,7 @@ import shapes.Rectangle;
 
 public class RectangleAdapter implements IShape
 {
-    private double x;
-    private double y;
-    private double width;
-    private double height;
-    private Color color;
-    private double thickness;
-    private boolean isFill;
+    private Rectangle rectangle;
     /**
      * | Description |
      * Creates a Rectangle class object
@@ -21,13 +15,7 @@ public class RectangleAdapter implements IShape
      */
     public RectangleAdapter(Rectangle rectangle)
     {
-        this.x = rectangle.getX();
-        this.y = rectangle.getY();
-        this.width = rectangle.getWidth();
-        this.height = rectangle.getHeight();
-        this.thickness = rectangle.getThickness();
-        this.color = rectangle.getColor();
-        this.isFill = rectangle.isFill();
+        this.rectangle = rectangle;
     }
     /**
      * | Description |
@@ -38,7 +26,14 @@ public class RectangleAdapter implements IShape
     @Override
     public IShape setThickness(double thickness)
     {
-        this.thickness = thickness;
+        rectangle = new Rectangle(
+                        rectangle.getX(),
+                        rectangle.getY(),
+                        rectangle.getWidth(),
+                        rectangle.getHeight(),
+                        thickness,
+                        rectangle.getColor(),
+                        rectangle.isFill());
         return this;
     }
     /**
@@ -50,7 +45,14 @@ public class RectangleAdapter implements IShape
     @Override
     public IShape setColor(Color color)
     {
-        this.color = color;
+        rectangle = new Rectangle(
+                rectangle.getX(),
+                rectangle.getY(),
+                rectangle.getWidth(),
+                rectangle.getHeight(),
+                rectangle.getThickness(),
+                color,
+                rectangle.isFill());
         return this;
     }
     /**
@@ -62,7 +64,14 @@ public class RectangleAdapter implements IShape
     @Override
     public IShape setFilled(boolean isFill)
     {
-        this.isFill = isFill;
+        rectangle = new Rectangle(
+                rectangle.getX(),
+                rectangle.getY(),
+                rectangle.getWidth(),
+                rectangle.getHeight(),
+                rectangle.getThickness(),
+                rectangle.getColor(),
+                isFill);
         return this;
     }
     /**
@@ -73,7 +82,7 @@ public class RectangleAdapter implements IShape
     @Override
     public double getX()
     {
-        return this.x;
+        return rectangle.getX();
     }
     /**
      * | Description |
@@ -83,7 +92,7 @@ public class RectangleAdapter implements IShape
     @Override
     public double getY()
     {
-        return this.y;
+        return rectangle.getY();
     }
     /**
      * | Description |
@@ -93,7 +102,7 @@ public class RectangleAdapter implements IShape
     @Override
     public double getThickness()
     {
-        return this.thickness;
+        return rectangle.getThickness();
     }
     /**
      * | Description |
@@ -103,7 +112,7 @@ public class RectangleAdapter implements IShape
     @Override
     public Color getColor()
     {
-        return this.color;
+        return rectangle.getColor();
     }
     /**
      * | Description |
@@ -113,7 +122,7 @@ public class RectangleAdapter implements IShape
     @Override
     public boolean getFilled()
     {
-        return this.isFill;
+        return rectangle.isFill();
     }
     /**
      * | Description |
@@ -123,23 +132,23 @@ public class RectangleAdapter implements IShape
     @Override
     public void drawShape(GraphicsContext graphics)
     {
-        if(isFill)
+        if(rectangle.isFill())
         {
             //set fill and stroke color and thickness
-            graphics.setFill(color);
-            graphics.setStroke(color);
-            graphics.setLineWidth(thickness);
+            graphics.setFill(rectangle.getColor());
+            graphics.setStroke(rectangle.getColor());
+            graphics.setLineWidth(rectangle.getThickness());
             //draw stroke and fill
-            graphics.fillRect(x, y, width, height);
-            graphics.strokeRect(x, y, width, height);
+            graphics.fillRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
+            graphics.strokeRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
         }
         else
         {
             //set color and thickness
-            graphics.setStroke(color);
-            graphics.setLineWidth(thickness);
+            graphics.setStroke(rectangle.getColor());
+            graphics.setLineWidth(rectangle.getThickness());
             //draw rectangle line
-            graphics.strokeRect(x, y, width, height);
+            graphics.strokeRect(rectangle.getX(), rectangle.getY(), rectangle.getWidth(), rectangle.getHeight());
         }
     }
 }

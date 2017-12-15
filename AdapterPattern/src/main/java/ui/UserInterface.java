@@ -147,8 +147,10 @@ public class UserInterface
     {
         if (graphicsContext != null && currentIShape != null)
         {
-            savedShapes.update(currentIShape, thickness, color, isFill);
-            savedShapes.drawShapes(graphicsContext);
+            if(savedShapes.update(currentIShape, thickness, color, isFill))
+            {
+                savedShapes.drawShapes(graphicsContext);
+            }
         }
     }
 
@@ -161,8 +163,7 @@ public class UserInterface
         colorPicker.setOnAction(event ->
         {
             color = colorPicker.getValue();
-            savedShapes.update(currentIShape, thickness, color, isFill);
-            savedShapes.drawShapes(graphicsContext);
+            updateCurrentIShape();
         });
 
         hBox.getChildren().add(colorPicker);

@@ -17,13 +17,7 @@ import shapes.Triangle;
  */
 public class TriangleAdapter implements IShape
 {
-    private double x;
-    private double y;
-    private double width;
-    private double height;
-    private double thickness;
-    private Color color;
-    private boolean isFill;
+    private Triangle triangle;
 
     /**
      * | Description |
@@ -32,13 +26,7 @@ public class TriangleAdapter implements IShape
      */
     public TriangleAdapter(Triangle triangle)
     {
-        x = triangle.getX();
-        y = triangle.getY();
-        width = triangle.getWidth();
-        height = triangle.getHeight();
-        thickness = triangle.getThickness();
-        color = triangle.getColor();
-        isFill = triangle.isFill();
+        this.triangle = triangle;
     }
     /**
      * | Description |
@@ -49,7 +37,14 @@ public class TriangleAdapter implements IShape
     @Override
     public IShape setThickness(double thickness)
     {
-        this.thickness = thickness;
+        triangle = new Triangle(
+                triangle.getX(),
+                triangle.getY(),
+                triangle.getWidth(),
+                triangle.getHeight(),
+                thickness,
+                triangle.getColor(),
+                triangle.isFill());
         return this;
     }
     /**
@@ -61,7 +56,14 @@ public class TriangleAdapter implements IShape
     @Override
     public IShape setColor(Color color)
     {
-        this.color = color;
+        triangle = new Triangle(
+                triangle.getX(),
+                triangle.getY(),
+                triangle.getWidth(),
+                triangle.getHeight(),
+                triangle.getThickness(),
+                color,
+                triangle.isFill());
         return this;
     }
     /**
@@ -73,7 +75,14 @@ public class TriangleAdapter implements IShape
     @Override
     public IShape setFilled(boolean isFill)
     {
-        this.isFill = isFill;
+        triangle = new Triangle(
+                triangle.getX(),
+                triangle.getY(),
+                triangle.getWidth(),
+                triangle.getHeight(),
+                triangle.getThickness(),
+                triangle.getColor(),
+                isFill);
         return this;
     }
     /**
@@ -84,7 +93,7 @@ public class TriangleAdapter implements IShape
     @Override
     public double getX()
     {
-        return x;
+        return triangle.getX();
     }
     /**
      * | Description |
@@ -94,7 +103,7 @@ public class TriangleAdapter implements IShape
     @Override
     public double getY()
     {
-        return y;
+        return triangle.getY();
     }
     /**
      * | Description |
@@ -104,7 +113,7 @@ public class TriangleAdapter implements IShape
     @Override
     public double getThickness()
     {
-        return thickness;
+        return getThickness();
     }
     /**
      * | Description |
@@ -114,7 +123,7 @@ public class TriangleAdapter implements IShape
     @Override
     public Color getColor()
     {
-        return color;
+        return triangle.getColor();
     }
     /**
      * | Description |
@@ -124,7 +133,7 @@ public class TriangleAdapter implements IShape
     @Override
     public boolean getFilled()
     {
-        return isFill;
+        return triangle.isFill();
     }
     /**
      * | Description |
@@ -134,19 +143,27 @@ public class TriangleAdapter implements IShape
     @Override
     public void drawShape(GraphicsContext graphics)
     {
-        if (isFill)
+        if (triangle.isFill())
         {
-            graphics.setStroke(color);
-            graphics.setFill(color);
-            graphics.setLineWidth(thickness);
-            graphics.fillPolygon(new double[]{x, x + (width / 2), x + width }, new double[]{y, y + height, y}, 3);
+            graphics.setStroke(triangle.getColor());
+            graphics.setFill(triangle.getColor());
+            graphics.setLineWidth(triangle.getThickness());
+            graphics.fillPolygon(new double[]{
+                    triangle.getX(),
+                    triangle.getX() + (triangle.getWidth() / 2),
+                    triangle.getX() + triangle.getWidth() },
+                    new double[]{triangle.getY(), triangle.getY() + triangle.getHeight(), triangle.getY()}, 3);
 
         }
         else
         {
-            graphics.setStroke(color);
-            graphics.setLineWidth(thickness);
-            graphics.strokePolygon(new double[]{x, x + (width / 2), x + width }, new double[]{y, y + height, y}, 3);
+            graphics.setStroke(triangle.getColor());
+            graphics.setLineWidth(triangle.getThickness());
+            graphics.strokePolygon(new double[]{
+                    triangle.getX(),
+                    triangle.getX() + (triangle.getWidth() / 2),
+                    triangle.getX() + triangle.getWidth() },
+                    new double[]{triangle.getY(), triangle.getY() + triangle.getHeight(), triangle.getY()}, 3);
         }
     }
 }
