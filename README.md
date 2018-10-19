@@ -1,2 +1,2 @@
-# it_426_asign
+# Programing Patterns
 IT 426 Asignments
